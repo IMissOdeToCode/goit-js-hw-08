@@ -21,8 +21,13 @@ refs.form.addEventListener('submit', event => {
 refs.form.addEventListener('input', pushData);
 
 refs.button.addEventListener('click', () => {
+  if (refs.input.value === '' || refs.text.value === '') {
+    console.log('all fields must be filled');
+    return;
+  }
   console.log(`you send payload:`, payload);
   refs.form.reset();
+  localStorage.removeItem('feedback-form-state');
 });
 
 function pushData(event) {
