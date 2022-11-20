@@ -18,7 +18,7 @@ player.on('pause', function () {
   console.log(`pause play at ${time}`);
 });
 
-player.on('timeupdate', lodash.throttle(onTimeUpdate, 5000));
+player.on('timeupdate', lodash.throttle(onTimeUpdate, 1000));
 
 function onTimeUpdate(event) {
   localStorage.setItem('videoplayer-current-time', event.seconds);

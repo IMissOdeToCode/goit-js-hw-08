@@ -1,3 +1,5 @@
+const lodash = require('lodash');
+
 const refs = {
   form: document.querySelector('form'),
   input: document.querySelector('input'),
@@ -6,19 +8,19 @@ const refs = {
 };
 // console.log(refs);
 
-const template = {
+let template = {
   email: '',
   massage: '',
 };
 
-const payload = fetchData();
+let payload = fetchData();
 loadData(payload);
 
 refs.form.addEventListener('submit', event => {
   event.preventDefault();
 });
 
-refs.form.addEventListener('input', pushData);
+refs.form.addEventListener('input', lodash.throttle(pushData, 500));
 
 refs.button.addEventListener('click', () => {
   if (refs.input.value === '' || refs.text.value === '') {
@@ -27,6 +29,8 @@ refs.button.addEventListener('click', () => {
   }
   console.log(`you send payload:`, payload);
   refs.form.reset();
+  payload.email = '';
+  payload.massage = '';
   localStorage.removeItem('feedback-form-state');
 });
 
